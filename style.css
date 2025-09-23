@@ -234,6 +234,7 @@ footer{
     padding: 8px 12px;
     font-size: 0.95rem;
     transition: border-color 0.2s;
+    width: 85%;
 }
 
 .searching form input:focus {
@@ -242,22 +243,6 @@ footer{
     box-shadow: 0 0 3px rgba(0,0,0,0.1);
 }
 
-/* Search button */
-.searching form button {
-    margin-top: 6px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: none;
-    background-color: var(--primary-color);
-    color: white;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.searching form button:hover {
-    background-color: var(--hover-color);
-}
 
 .category form label {
     display: flex;
@@ -273,14 +258,3 @@ footer{
     background-color: var(--offwhite);
 }
 
-.products div{
-  border: 1px solid #000000;
-  border-radius: 8px;
-  padding: 16px;
-  margin: 8px;
-  width: 200px;
-  display: inline-block;
-  align-items: center;
-  vertical-align: top;
-  /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.103); */
-}
