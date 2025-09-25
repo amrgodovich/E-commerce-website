@@ -184,6 +184,7 @@ function addtofav(product) {
 
 function addtocart(product) {
     console.log(product.title);
+    console.log(cart);
     if (!cart.includes(product)) {
         cart.push(product)
     }
