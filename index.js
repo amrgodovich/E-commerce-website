@@ -1,6 +1,3 @@
-const primarycolor= '#5f3de7'
-const secondarycolor= '#ec512f'
-const hovercolor='#555edbff'
 document.addEventListener('DOMContentLoaded', () => {
     loadCategories();
     loadproducts();
@@ -10,37 +7,36 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', filterProducts);
 });
 
-const menuToggle = document.getElementById("menu-toggle");
-const panel = document.querySelector(".panel");
-menuToggle.addEventListener("click", () => {
-    panel.classList.toggle("active");
-    menuToggle.classList.toggle("open");
-});
-
 let allProducts = [];
+
+
+function displayCategories(categories) {
+    const container = document.getElementById('category');
+
+    categories.forEach(category => {
+        const label = document.createElement('label');
+        label.classList.add('label-cat');
+
+        const checkbox = document.createElement('input');
+        checkbox.classList.add('chk-cat');
+        checkbox.type = 'checkbox';
+        checkbox.value = category.slug;
+        checkbox.name = 'categories';
+        checkbox.addEventListener('change', filterProducts);
+
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(' ' + category.name));
+        container.appendChild(label);
+    });
+}
 
 async function loadCategories() {
     try {
         const response = await fetch('https://dummyjson.com/products/categories');
         if (!response.ok) throw new Error('Network response was not ok');
         const categories = await response.json();
-        const container = document.getElementById('category');
         
-        categories.forEach(category => {
-            const label = document.createElement('label');
-            label.classList.add('label-cat');
-
-            const checkbox = document.createElement('input');
-            checkbox.classList.add('chk-cat');
-            checkbox.type = 'checkbox';
-            checkbox.value = category.slug;
-            checkbox.name = 'categories';
-            checkbox.addEventListener('change', filterProducts);
-
-            label.appendChild(checkbox);
-            label.appendChild(document.createTextNode(' ' + category.name));
-            container.appendChild(label);
-        });
+        displayCategories(categories); // call the new function
     } catch (error) {
         console.error('Error fetching categories:', error);
     }
@@ -58,6 +54,7 @@ async function loadproducts() {
         console.error('Error fetching:', error);
     }
 }
+
 function displayProducts(products) {
     const container = document.getElementById('products');
     container.innerHTML = '';
@@ -72,9 +69,9 @@ function displayProducts(products) {
         imgContainer.classList.add('img-container');
 
         const img = document.createElement('img');
+        img.classList.add('product-img');
         img.src = product.thumbnail || product.images[0] || '';
         img.alt = product.title;
-        img.classList.add('product-img');
         imgContainer.appendChild(img);
 
         // Favourite button
@@ -116,7 +113,7 @@ function displayProducts(products) {
         titlecontainer.appendChild(title);
         contentContainer.appendChild(titlecontainer);
 
-        // Price + Add to Cart
+        // Price + Cart btn
         const priceCartContainer = document.createElement('div');
         priceCartContainer.classList.add('price-cart-container');
 
@@ -180,6 +177,7 @@ function addtofav(product) {
     if(!fav.includes(product)){
         fav.push(product)
     }
+    localStorage.setItem("fav",JSON.stringify(fav))
 }
 
 function addtocart(product) {
@@ -189,3 +187,4 @@ function addtocart(product) {
         cart.push(product)
     }
 }
+

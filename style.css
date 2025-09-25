@@ -97,7 +97,7 @@ nav {
 
 
 footer{
-    margin: 8px 0;
+    /* margin: 8px 0; */
     background-color: var(--primary-color);
 }
 
@@ -106,7 +106,7 @@ footer{
     justify-content: space-between;
     align-items: center;
     color: var(--light-color);
-    margin: 20px;
+    /* margin: 20px; */
     padding: 20px 40px;
     max-width: 80%;
     gap: 10px;
@@ -218,6 +218,7 @@ footer{
     border-radius: 12px;
     padding: 0;
     margin: 12px;
+    margin-left: 20px;
     width: 240px;
     height: 313px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -349,3 +350,4 @@ footer{
     margin: 0;
     color: var(--secondary-color);
 }
+
