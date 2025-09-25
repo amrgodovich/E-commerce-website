@@ -49,7 +49,6 @@ function display_empty_fav(){
     fav_container.appendChild(empty_container)
     empty_container.classList.add('empty-container')
     fav_container.style.height='60vh'
-    // location.reload();
     
 }
 
@@ -66,7 +65,7 @@ function display_favourite(fav_ls){
             title.classList.add('fav-title')
 
             const price = document.createElement('h5')
-            price.innerText=product.price+"$"
+            price.innerText="$"+product.price
             price.classList.add('fav-price')
 
             const titlecontainer = document.createElement('div')
