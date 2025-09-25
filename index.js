@@ -181,10 +181,11 @@ function addtofav(product) {
 }
 
 function addtocart(product) {
-    console.log(product.title);
-    console.log(cart);
+    // console.log(product.title);
+    console.log("cart",cart);
     if (!cart.includes(product)) {
         cart.push(product)
     }
+    localStorage.setItem("cart",JSON.stringify(cart))
 }
 

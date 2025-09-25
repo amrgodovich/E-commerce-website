@@ -16,6 +16,9 @@ async function getfav() {
         display_favourite(fav_ls)
         console.log(fav_ls)
     }
+    else{
+        display_empty_fav();
+    }
 }
 
 async function remove_fav(product_id){
@@ -33,7 +36,7 @@ async function remove_fav(product_id){
 function display_empty_fav(){
     const fav_container = document.getElementById('fav-container')
     const message = document.createElement('h2')
-    message.innerText=`No favourites to display
+    message.innerText=`No favourites to display.
     Add some products to your favourites list to see them here.`
     message.classList.add('empty-fav-message')
 
