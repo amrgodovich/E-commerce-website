@@ -1,3 +1,6 @@
+const primarycolor= '#5f3de7'
+const secondarycolor= '#ec512f'
+const hovercolor='#555edbff'
 document.addEventListener('DOMContentLoaded', () => {
     loadCategories();
     loadproducts();
@@ -25,15 +28,15 @@ async function loadCategories() {
         
         categories.forEach(category => {
             const label = document.createElement('label');
+            label.classList.add('label-cat');
+
             const checkbox = document.createElement('input');
+            checkbox.classList.add('chk-cat');
             checkbox.type = 'checkbox';
             checkbox.value = category.slug;
             checkbox.name = 'categories';
-            checkbox.addEventListener('change', filterProducts); // Add event listener
-            
-            label.style.color = '#264653';
-            label.style.display = 'block';
-            label.style.marginBottom = '5px';
+            checkbox.addEventListener('change', filterProducts);
+
             label.appendChild(checkbox);
             label.appendChild(document.createTextNode(' ' + category.name));
             container.appendChild(label);
@@ -42,6 +45,7 @@ async function loadCategories() {
         console.error('Error fetching categories:', error);
     }
 }
+
 
 async function loadproducts() {
     try {
@@ -54,86 +58,96 @@ async function loadproducts() {
         console.error('Error fetching:', error);
     }
 }
-
 function displayProducts(products) {
     const container = document.getElementById('products');
     container.innerHTML = '';
-    
+
     products.forEach(product => {
-        //card
+        // Main card container
         const card = document.createElement('div');
-        card.style.border = '1px solid #ccc';
-        card.style.borderRadius = '8px';
-        card.style.padding = '16px';
-        card.style.margin = '8px';
-        card.style.width = '200px';
-        card.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-        card.style.display = 'inline-block';
-        card.style.alignItems = 'center';
-        card.style.justifyContent = 'center';
-        card.style.verticalAlign = 'top';
-        
-        //img
+        card.classList.add('product-card');
+
+        // Image container
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
+
         const img = document.createElement('img');
         img.src = product.thumbnail || product.images[0] || '';
         img.alt = product.title;
-        img.style.width = '100%';
-        img.style.borderRadius = '6px 6px 0 0';
-        card.appendChild(img);
-        
-        //title
-        const title = document.createElement('h3');
-        title.textContent = product.title;
-        title.style.fontSize = '16px';
-        title.style.margin = '12px 0 4px 0';
-        card.appendChild(title);
-        
-        //price
-        const price = document.createElement('p');
-        price.textContent = `Price: $${product.price}`;
-        price.style.margin = '4px 0';
-        price.style.fontWeight = 'bold';
-        card.appendChild(price);
-        
-        //category
-        const category = document.createElement('p');
-        category.textContent = `Category: ${product.category}`;
-        category.style.margin = '4px 0 12px 0';
-        card.appendChild(category);
-        
-        //container
-        const btnContainer = document.createElement('div');
-        btnContainer.style.display = 'flex';
-        btnContainer.style.justifyContent = 'space-between';
-        
-        //AddCart btn
-        const btnAddToCart = document.createElement('button');
-        btnAddToCart.textContent = 'Add to Cart';
-        btnAddToCart.style.padding = '6px 10px';
-        btnAddToCart.style.cursor = 'pointer';
-        btnAddToCart.style.border = 'none';
-        btnAddToCart.style.borderRadius = '4px';
-        btnAddToCart.style.backgroundColor = '#2A9D8F';
-        btnAddToCart.style.color = 'white';
-        btnAddToCart.onclick = () => addtocart(product);
-        btnContainer.appendChild(btnAddToCart);
-        
-        //fav btn
+        img.classList.add('product-img');
+        imgContainer.appendChild(img);
+
+        // Favourite button
         const btnFavourite = document.createElement('button');
-        btnFavourite.textContent = 'Favourite';
-        btnFavourite.style.padding = '6px 10px';
-        btnFavourite.style.cursor = 'pointer';
-        btnFavourite.style.border = 'none';
-        btnFavourite.style.borderRadius = '4px';
-        btnFavourite.style.backgroundColor = '#2A9D8F';
-        btnFavourite.style.color = 'white';
-        btnFavourite.onclick = () => addtofav(product);
-        btnContainer.appendChild(btnFavourite);
-        
-        card.appendChild(btnContainer);
+        btnFavourite.classList.add('btn-fav');
+
+        const heart=document.createElement('img')
+        heart.classList.add('heartfav')
+        heart.src='assets/fav.png'
+
+        btnFavourite.appendChild(heart)
+
+        btnFavourite.onclick = (e) => {
+            e.stopPropagation();
+            addtofav(product);
+        };
+        imgContainer.appendChild(btnFavourite);
+
+        // Category label
+        const categoryLabel = document.createElement('span');
+        categoryLabel.textContent = product.category;
+        categoryLabel.classList.add('category-label');
+        imgContainer.appendChild(categoryLabel);
+
+        card.appendChild(imgContainer);
+
+        // Content container
+        const contentContainer = document.createElement('div');
+        contentContainer.classList.add('content-container');
+
+        // Title
+        const titlecontainer = document.createElement('div');
+        titlecontainer.classList.add('title-container');
+
+        const title = document.createElement('h4');
+        title.textContent = product.title;
+        title.classList.add('product-title');
+
+        titlecontainer.appendChild(title);
+        contentContainer.appendChild(titlecontainer);
+
+        // Price + Add to Cart
+        const priceCartContainer = document.createElement('div');
+        priceCartContainer.classList.add('price-cart-container');
+
+        const price = document.createElement('h2');
+        price.textContent = `$${product.price}`;
+        price.classList.add('product-price');
+        priceCartContainer.appendChild(price);
+
+        const btnAddToCart = document.createElement('button');
+        btnAddToCart.classList.add('btn-cart');
+
+        const carticon=document.createElement('img')
+        carticon.classList.add('carticon')
+        carticon.src='assets/cart.webp'
+
+        btnAddToCart.appendChild(carticon)
+
+        btnAddToCart.onclick = (e) => {
+            e.stopPropagation();
+            addtocart(product);
+        };
+        priceCartContainer.appendChild(btnAddToCart);
+
+        contentContainer.appendChild(priceCartContainer);
+        card.appendChild(contentContainer);
+
+        // Add card to container
         container.appendChild(card);
     });
 }
+
 
 function filterProducts() {
     let filteredProducts = allProducts;
