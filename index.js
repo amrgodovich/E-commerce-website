@@ -172,8 +172,8 @@ fav=[]
 cart=[]
 
 function addtofav(product) {
-    console.log(product.title);
-    console.log(fav);
+    console.log("added to fav",product.title);
+    console.log("fav",fav);
     if(!fav.includes(product)){
         fav.push(product)
     }
@@ -181,7 +181,7 @@ function addtofav(product) {
 }
 
 function addtocart(product) {
-    // console.log(product.title);
+    console.log("added to cart",product.title);
     console.log("cart",cart);
     if (!cart.includes(product)) {
         cart.push(product)
