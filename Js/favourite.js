@@ -67,14 +67,20 @@ function display_favourite(fav_ls){
             title.innerText=product.title
             title.classList.add('fav-title')
 
-            const price = document.createElement('h5')
+            const price = document.createElement('h4')
             price.innerText="$"+product.price
             price.classList.add('fav-price')
+
+            const brand = document.createElement('h4')
+            brand.innerText=product.brand
+            brand.classList.add('fav-brand')
 
             const titlecontainer = document.createElement('div')
             titlecontainer.classList.add('title-container')
 
+
             titlecontainer.appendChild(title)
+            titlecontainer.appendChild(brand)
             titlecontainer.appendChild(price)
 
             const imgContainer = document.createElement('div');

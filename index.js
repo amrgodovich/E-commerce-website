@@ -168,8 +168,8 @@ function filterProducts() {
     displayProducts(filteredProducts);
 }
 
-fav=[]
-cart=[]
+let fav = JSON.parse(localStorage.getItem("fav")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 function addtofav(product) {
     console.log("added to fav",product.title);

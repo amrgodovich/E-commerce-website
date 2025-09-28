@@ -30,6 +30,7 @@
 
 /* Each favourite card */
 .fav-card {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -78,16 +79,24 @@
 .fav-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: var(--primary-color);
+  /* color: var(--primary-color); */
   margin: 0;
 }
 
 .fav-price {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   color: var(--secondary-color);
   margin: 0;
 }
+
+.fav-brand {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+}
+
 
 .remove-btn{
   background-color: rgb(221, 68, 68);
@@ -126,4 +135,8 @@
   display: block;
   margin: 0 auto;
   width: 150px;
+}
+
+.fav-card:nth-child(even){
+    background-color:  #f3f3f3;
 }

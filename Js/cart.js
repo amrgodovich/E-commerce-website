@@ -33,7 +33,12 @@ async function remove_cart(product_id){
 
 
 function display_empty_cart(){
+    const tot=document.getElementById('total')
+    tot.innerHTML=""
+
     const cart_container = document.getElementById('cart-container')
+    cart_container.innerHTML=''
+
     const message = document.createElement('h2')
     message.innerText=`No Items to display.
     Add some products to your cart list to see them here.`
@@ -71,7 +76,7 @@ function display_cart(cart_ls) {
 
     // Header row
     const header = document.createElement('div');
-    header.classList.add('cart-row', 'cart-header');
+    header.classList.add( 'table-header');
     header.innerHTML = `
         <div>Product</div>
         <div>Brand</div>
@@ -83,12 +88,18 @@ function display_cart(cart_ls) {
     `;
     cart_container.appendChild(header);
 
+    // const final_hr =document.createElement('hr');
+    // final_hr.classList.add('final_hr')
+    // const total = document.getElementById('total')
+
+    // const total_price = 0
+
     // Product rows
     cart_ls.forEach(product => {
         const row = document.createElement('div');
-        row.classList.add('cart-row');
+        row.classList.add('cart-row','cart-row-content');
 
-        // Product info (image + title)
+        // Product info (image & title)
         const productInfo = document.createElement('div');
         productInfo.classList.add('product-info');
 
@@ -124,6 +135,8 @@ function display_cart(cart_ls) {
         qtyInput.addEventListener('change', () => {
             product.quantity = parseInt(qtyInput.value);
             totalDiv.innerText = `$${(product.price * product.quantity).toFixed(2)}`;
+            save_cart(cart_ls);
+            update_total(cart_ls);
         });
         qtyContainer.appendChild(qtyInput);
 
@@ -139,7 +152,10 @@ function display_cart(cart_ls) {
         const removecontainer = document.createElement('div')
         removecontainer.classList.add('remove-btn')
         removecontainer.appendChild(remove)
-        remove.onclick = () => remove_cart(product.id); // implement this
+        remove.onclick = () => {remove_cart(product.id);
+        }
+
+
 
         // Append all columns to row
         row.appendChild(productInfo);
@@ -149,12 +165,30 @@ function display_cart(cart_ls) {
         row.appendChild(qtyContainer);
         row.appendChild(totalDiv);
         row.appendChild(removecontainer);
-
+        
         cart_container.appendChild(row);
-    });
+
+    }
+    
+);
+    // cart_container.appendChild(total);
+    update_total(cart_ls);
+    // total.appendChild(final_hr)
 }
 
-// Example function to get cart data for checkout
+
+function save_cart(cart_ls) {
+    localStorage.setItem('cart', JSON.stringify(cart_ls));
+}
+
+function update_total(cart_ls) {
+    const total_price = cart_ls.reduce((sum, p) => sum + p.price * (p.quantity || 1), 0);
+
+    const total_price_div = document.getElementById('total-price');
+    total_price_div.innerText = `$${total_price.toFixed(2)}`;
+}
+
+
 function get_cart_data(cart_ls) {
     return cart_ls.map(p => ({
         id: p.id,
