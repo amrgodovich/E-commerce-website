@@ -72,7 +72,7 @@ function display_favourite(fav_ls){
             price.classList.add('fav-price')
 
             const brand = document.createElement('h4')
-            brand.innerText=product.brand
+            brand.innerText=product.brand || "-"
             brand.classList.add('fav-brand')
 
             const titlecontainer = document.createElement('div')
