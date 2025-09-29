@@ -132,7 +132,6 @@ nav {
 
   .filter {
     position: fixed;
-    top: 121px;
     left: -100%;      
     width: 70%;
     height: 73%;
@@ -145,8 +144,8 @@ nav {
   }
 
   .filter.active {
-    /* background-color: var(--hover-color); */
     left: 0;
+    top: 121px;
   }
 
   .panel.active {
@@ -210,7 +209,7 @@ footer{
   gap: 1em;
   padding: 14px 14px;
   border-radius: 12px;
-  align-items: center;
+  /* align-items: center; */
 }
 .filter {
   flex-basis: 25%;
