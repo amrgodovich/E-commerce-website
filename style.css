@@ -15,6 +15,36 @@
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+.btn-filter-container{
+  /* justify-content: center; */
+  display: flex;
+  align-items: center;
+  /* border: solid 1px; */
+  justify-content: center;
+  padding: 8px 0px 0px 0px;
+  display: none;
+}
+.filter-btn{
+  gap: 4px;
+  /* border: none; */
+  width: 40%;
+  height: 40px;
+  border-radius: 15px;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  font-size: 18px;
+}
+
+/* .filter-btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+} */
+
 nav {
   display: flex;
   align-items: center;
@@ -99,11 +129,38 @@ nav {
     z-index: 99;
 
   }
+
+  .filter {
+    position: fixed;
+    top: 121px;
+    left: -100%;      
+    width: 70%;
+    height: 73%;
+    background: white;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+  }
+
+  .filter.active {
+    /* background-color: var(--hover-color); */
+    left: 0;
+  }
+
   .panel.active {
     display: flex; 
   }
 
   .menu-toggle {
+    display: flex;
+  }
+  .product-card {
+    width: 80rem;
+  }
+
+  .btn-filter-container {
     display: flex;
   }
 }
@@ -146,13 +203,14 @@ footer{
 
 .shopping{
   display: flex;
-  justify-content: center;
-  justify-content: space-evenly;
+  /* justify-content: center;
+  justify-content: space-evenly; */
   /* border: solid 1px; */
   background-color: var(--background-color);
   gap: 1em;
   padding: 14px 14px;
   border-radius: 12px;
+  align-items: center;
 }
 .filter {
   flex-basis: 25%;
@@ -232,7 +290,7 @@ footer{
     padding: 0;
     margin: 12px;
     margin-left: 20px;
-    width: 240px;
+    width: 20rem;
     height: 313px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     display: inline-block;
@@ -250,6 +308,10 @@ footer{
 
 .product-card:hover .title-container *{
   color: var(--primary-color);
+}
+
+.product-card:hover .product-brand{
+  color: var(--text-color);
 }
 /* ===== Image Container ===== */
 .img-container {
@@ -338,18 +400,24 @@ footer{
 }
 
 .title-container {
-    height: 45px;
+    height: 21px;
     overflow:hidden;
 }
 
-.product-title {
+.product-title ,.product-brand{
     font-size: 16px;
     font-weight: 600;
-    margin: 0 0 12px 0;
+    margin: 0 0 4px 0;
     color: #333;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+.product-brand{
+  padding-top: 7px;
+  color: var(--primary-color);
+  overflow: visible;
+  font-size: 0.9em;
 }
 
 .price-cart-container {
@@ -363,4 +431,3 @@ footer{
     margin: 0;
     color: var(--secondary-color);
 }
-

@@ -110,8 +110,17 @@ function displayProducts(products) {
         title.textContent = product.title;
         title.classList.add('product-title');
 
+        const brand = document.createElement('h6');
+        brand.textContent = product.brand || "";
+        brand.classList.add('product-brand');
+
+        const brandcontainer = document.createElement('div');
+        brandcontainer.appendChild(brand)
+
         titlecontainer.appendChild(title);
+        // titlecontainer.appendChild(brand);
         contentContainer.appendChild(titlecontainer);
+        contentContainer.appendChild(brandcontainer);
 
         // Price + Cart btn
         const priceCartContainer = document.createElement('div');
