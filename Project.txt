@@ -1,4 +1,4 @@
-Project Title: "MiniMart" – Client-Side E-Commerce Site
+Project Title: "MiniMart" – Client-Side E-Commerce Site.
 
 Functional Requirements
 
