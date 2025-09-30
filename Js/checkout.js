@@ -1,18 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadOrderSummary();
-    setupFormValidation();
 });
 
 function loadOrderSummary() {
     const cartTxt = localStorage.getItem('cart');
-    
+
     if (!cartTxt) {
         displayEmptyCart();
         return;
     }
 
     const cart = JSON.parse(cartTxt);
-    
+
     if (cart.length === 0) {
         displayEmptyCart();
         return;
@@ -24,11 +23,16 @@ function loadOrderSummary() {
 
 function displayEmptyCart() {
     const summaryItems = document.getElementById('summary-items');
-    summaryItems.innerHTML = '<p class="empty-cart-message">Your cart is empty. Please add items to your cart before checkout.</p>';
-    
+    summaryItems.innerHTML = ""; // safe reset
+
+    const msg = document.createElement('p');
+    msg.className = "empty-cart-message";
+    msg.textContent = "Your cart is empty. Please add items to your cart before checkout.";
+    summaryItems.appendChild(msg);
+
     document.getElementById('subtotal').textContent = '$0.00';
     document.getElementById('final-total').textContent = '$5.00';
-    
+
     const form = document.getElementById('checkout-form');
     const submitBtn = form.querySelector('.submit-btn');
     submitBtn.disabled = true;
@@ -38,21 +42,42 @@ function displayEmptyCart() {
 
 function displayOrderSummary(cart) {
     const summaryItems = document.getElementById('summary-items');
-    summaryItems.innerHTML = '';
+    summaryItems.innerHTML = ""; // clear old items
 
     cart.forEach(product => {
         const item = document.createElement('div');
-        item.classList.add('summary-item');
-        
-        item.innerHTML = `
-            <img src="${product.thumbnail || product.images?.[0] || ''}" alt="${product.title}">
-            <div class="summary-item-info">
-                <div class="summary-item-title">${product.title}</div>
-                <div class="summary-item-details">Qty: ${product.quantity || 1}</div>
-            </div>
-            <div class="summary-item-price">$${(product.price * (product.quantity || 1)).toFixed(2)}</div>
-        `;
-        
+        item.className = "summary-item";
+
+        // product image
+        const img = document.createElement('img');
+        img.src = product.thumbnail || (product.images?.[0] || "");
+        img.alt = product.title;
+
+        // info container
+        const info = document.createElement('div');
+        info.className = "summary-item-info";
+
+        const title = document.createElement('div');
+        title.className = "summary-item-title";
+        title.textContent = product.title;
+
+        const details = document.createElement('div');
+        details.className = "summary-item-details";
+        details.textContent = `Qty: ${product.quantity || 1}`;
+
+        info.appendChild(title);
+        info.appendChild(details);
+
+        // price
+        const price = document.createElement('div');
+        price.className = "summary-item-price";
+        price.textContent = `$${(product.price * (product.quantity || 1)).toFixed(2)}`;
+
+        // assemble
+        item.appendChild(img);
+        item.appendChild(info);
+        item.appendChild(price);
+
         summaryItems.appendChild(item);
     });
 }
@@ -72,4 +97,5 @@ document.getElementById('checkout-form').addEventListener('submit', function (e)
     localStorage.removeItem('cart');
     window.location.reload();
     this.reset();
-    alert('Your order has been placed successfully!');});
+    alert('Your order has been placed successfully!');
+});
