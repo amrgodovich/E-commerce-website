@@ -140,3 +140,12 @@
 .fav-card:nth-child(even){
     background-color:  #f3f3f3;
 }
+
+@media (max-width: 420px) {
+.fav-title,.fav-brand,.fav-price {
+  font-size: 1rem;
+  font-weight: bold;
+  /* color: var(--primary-color); */
+  margin: 0;
+}
+}
