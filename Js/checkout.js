@@ -84,7 +84,7 @@ function displayOrderSummary(cart) {
 
 function calculateTotals(cart) {
     const subtotal = cart.reduce((sum, p) => sum + p.price * (p.quantity || 1), 0);
-    const shipping = 5.00;
+    const shipping = 10.00;
     const total = subtotal + shipping;
 
     document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
@@ -93,7 +93,6 @@ function calculateTotals(cart) {
 }
 
 document.getElementById('checkout-form').addEventListener('submit', function (e) {
-    e.preventDefault();
     localStorage.removeItem('cart');
     window.location.reload();
     this.reset();
