@@ -84,7 +84,7 @@ function display_cart(cart_ls) {
         <div>Price</div>
         <div>Qty</div>
         <div>Total</div>
-        <div> </div>
+        <div> </div> 
     `;
     cart_container.appendChild(header);
 
@@ -183,7 +183,6 @@ function save_cart(cart_ls) {
 
 function update_total(cart_ls) {
     const total_price = cart_ls.reduce((sum, p) => sum + p.price * (p.quantity || 1), 0);
-
     const total_price_div = document.getElementById('total-price');
     total_price_div.innerText = `$${total_price.toFixed(2)}`;
 }

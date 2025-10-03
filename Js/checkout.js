@@ -46,23 +46,23 @@ function displayOrderSummary(cart) {
 
     cart.forEach(product => {
         const item = document.createElement('div');
-        item.className = "summary-item";
+        item.classList.add("summary-item");
 
         // product image
         const img = document.createElement('img');
-        img.src = product.thumbnail || (product.images?.[0] || "");
+        img.src = product.thumbnail || product.images[0] || '';
         img.alt = product.title;
 
         // info container
         const info = document.createElement('div');
-        info.className = "summary-item-info";
+        info.classList.add("summary-item-info")
 
         const title = document.createElement('div');
-        title.className = "summary-item-title";
+        title.classList.add("summary-item-title");
         title.textContent = product.title;
 
         const details = document.createElement('div');
-        details.className = "summary-item-details";
+        details.classList.add("summary-item-details")
         details.textContent = `Qty: ${product.quantity || 1}`;
 
         info.appendChild(title);
@@ -70,7 +70,7 @@ function displayOrderSummary(cart) {
 
         // price
         const price = document.createElement('div');
-        price.className = "summary-item-price";
+        price.classList.add("summary-item-price")
         price.textContent = `$${(product.price * (product.quantity || 1)).toFixed(2)}`;
 
         // appending
@@ -93,8 +93,10 @@ function calculateTotals(cart) {
 }
 
 document.getElementById('checkout-form').addEventListener('submit', function (e) {
+    e.preventDefault();
     localStorage.removeItem('cart');
-    window.location.reload();
     this.reset();
-    // alert('Your order has been placed successfully!');
+    alert('Your order has been placed successfully!');
+    window.location.href = 'index.html'; 
 });
+
