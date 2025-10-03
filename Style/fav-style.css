@@ -1,4 +1,8 @@
-
+.fav-pg-cont{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 .header-fav{
   margin: 1px;
   padding: 15px 15px 2px 15px;

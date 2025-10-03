@@ -23,7 +23,7 @@ function loadOrderSummary() {
 
 function displayEmptyCart() {
     const summaryItems = document.getElementById('summary-items');
-    summaryItems.innerHTML = ""; // safe reset
+    summaryItems.innerHTML = "";
 
     const msg = document.createElement('p');
     msg.className = "empty-cart-message";
@@ -31,7 +31,7 @@ function displayEmptyCart() {
     summaryItems.appendChild(msg);
 
     document.getElementById('subtotal').textContent = '$0.00';
-    document.getElementById('final-total').textContent = '$5.00';
+    document.getElementById('final-total').textContent = '$10.00';
 
     const form = document.getElementById('checkout-form');
     const submitBtn = form.querySelector('.submit-btn');
@@ -42,7 +42,7 @@ function displayEmptyCart() {
 
 function displayOrderSummary(cart) {
     const summaryItems = document.getElementById('summary-items');
-    summaryItems.innerHTML = ""; // clear old items
+    summaryItems.innerHTML = ""; // for new ites each call
 
     cart.forEach(product => {
         const item = document.createElement('div');
@@ -73,7 +73,7 @@ function displayOrderSummary(cart) {
         price.className = "summary-item-price";
         price.textContent = `$${(product.price * (product.quantity || 1)).toFixed(2)}`;
 
-        // assemble
+        // appending
         item.appendChild(img);
         item.appendChild(info);
         item.appendChild(price);
@@ -96,5 +96,5 @@ document.getElementById('checkout-form').addEventListener('submit', function (e)
     localStorage.removeItem('cart');
     window.location.reload();
     this.reset();
-    alert('Your order has been placed successfully!');
+    // alert('Your order has been placed successfully!');
 });
