@@ -25,7 +25,7 @@ function displayCategories(categories) {
         checkbox.addEventListener('change', filterProducts);
 
         label.appendChild(checkbox);
-        label.appendChild(document.createTextNode(' ' + category.name));
+        label.append(' ' + category.name);
         container.appendChild(label);
     });
 }
