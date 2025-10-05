@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     loadCategories();
     loadproducts();
-    const searchForm = document.querySelector('.searching form');
     const searchInput = document.getElementById('p-n');
     
     searchInput.addEventListener('input', filterProducts);
@@ -157,8 +156,7 @@ function displayProducts(products) {
 
 function filterProducts() {
     let filteredProducts = allProducts;
-    const checkedCategories = Array.from(document.querySelectorAll('input[name="categories"]:checked'))
-        .map(checkbox => checkbox.value);
+    const checkedCategories = Array.from(document.querySelectorAll('input:checked')).map(checkbox => checkbox.value);
         
     if (checkedCategories.length > 0) {
         filteredProducts = filteredProducts.filter(product => 
