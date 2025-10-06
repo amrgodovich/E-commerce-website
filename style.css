@@ -83,7 +83,7 @@ nav {
   text-decoration: none;
   color: var(--light-color);
   font-weight: 500;
-  transition: color 0.3s;
+  transition: color 0.8s;
 }
 
 .panel li a:hover {
@@ -389,8 +389,8 @@ footer{
   font-weight: 600;
   margin: 0 0 4px 0;
   color: #333;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
+  line-height: 1.4em;
+  max-height: 2.8em; 
   overflow: hidden;
 }
 .product-brand{
@@ -445,7 +445,10 @@ section {
   justify-content: center;
   color: white;
   text-align: center;
-  background: url('assets/heroo.avif') no-repeat center/cover;
+  background: url('assets/heroo.avif') ;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 section::before {
@@ -474,12 +477,12 @@ section::before {
 
 .herobtn {
   padding: 10px 20px;
-  background: #5f3de7;
+  background: var(--primary-color);
   color: white;
   border-radius: 5px;
   text-decoration: none;
 }
 
 .herobtn:hover {
-  background: #3b25a3;
+  background: var(--hover-color);
 }
